@@ -1,0 +1,51 @@
+import random
+import math
+
+
+def monte_carlo_circle(n_points):
+    """Approximates pi by randomly distributing n_point dots on a square and measuring
+    the proportion that fall within the locus of the inscribed unit circle.
+    Returns a float."""
+
+    points = []
+
+    for i in range(n_points):
+
+        # Creates two floats acting as the x & y co-ordinates of a point, then tests
+        # if they lie within a unit of the origin.
+
+        inCircle = (
+            math.sqrt(random.uniform(-1, 1) ** 2 + random.uniform(-1, 1) ** 2)
+        ) <= 1
+
+        # Appends the result to a testing list.
+
+        points.append(inCircle)
+
+    # Returns the sum of valid points, divided by the total points and multiplied
+    # by 4 (to get proportion of points covering a 2x2 square).
+
+    return sum(points) / n_points * 4
+
+
+print(monte_carlo_circle(50000))
+
+
+def monty_carlo_circle(n_points):
+    """Approximates pi by randomly distributing n_point dots on a square and measuring
+    the proportion that fall within the locus of the inscribed unit circle.
+    Returns a float."""
+
+    # Same as monte_carlo_circle, as a list comprehension.
+
+    return (
+        sum(
+            math.sqrt(random.uniform(-1, 1) ** 2 + random.uniform(-1, 1) ** 2) <= 1
+            for x in range(n_points)
+        )
+        / n_points
+        * 4
+    )
+
+
+print(monty_carlo_circle(50000))
